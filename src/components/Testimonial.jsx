@@ -36,7 +36,7 @@ const Testimonial = () => {
                                             <div className="inner">
                                                 <div className="card-info">
                                                     <div className="card-thumbnail">
-                                                        <img src="assets/images/testimonial/final-home--1st.png" alt="Testimonial" />
+                                                        <img src={e.img} alt=""  width={200}/>
                                                     </div>
                                                     <div className="card-content">
                                                         <h3 className="title">{e.name}</h3>
@@ -58,7 +58,7 @@ const Testimonial = () => {
                                                         </div>
                                                     </div>
                                                     <div className="seperator"></div>
-                                                    <p className="discription">
+                                                    <p className="discription fs-4">
                                                         {e.desp}
                                                     </p>
                                                 </div>

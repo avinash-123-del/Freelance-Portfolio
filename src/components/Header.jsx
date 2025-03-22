@@ -16,7 +16,7 @@ const Header = () => {
             <div className="header-left">
               <div className="logo">
                 <a href="index.html">
-                  <img src="assets/images/logo/logo-dark.png" alt="logo" />
+                  <img src="assets/images/logo/logo.png" alt="logo" />
                 </a>
               </div>
             </div>

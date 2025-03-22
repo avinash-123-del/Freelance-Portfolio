@@ -1,6 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
+
+    const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+        try {
+            // Replace with your API endpoint or logic
+            await axios.post('/send-email', formData);
+            setAlert({ show: true, type: 'success', message: 'Message sent successfully!' });
+            setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+        } catch (error) {
+            setAlert({ show: true, type: 'danger', message: 'Something went wrong. Please try again!' });
+        }
+    };
+
     return (
         <div>
             <div className="rn-contact-area rn-section-gap section-separator" id="contacts">
@@ -14,75 +42,90 @@ const Contact = () => {
                         </div>
                     </div>
 
+                    {alert.show && (
+                        <div className={`alert alert-${alert.type} mt-4`} role="alert">
+                            {alert.message}
+                        </div>
+                    )}
+
                     <div className="row mt--50 mt_md--40 mt_sm--40 mt-contact-sm">
-                        {/* <div className="col-lg-5">
-                            <div className="contact-about-area">
-                                <div className="thumbnail">
-                                    <img src="assets/images/contact/contact1.png" alt="contact" />
-                                </div>
-                                <div className="title-area">
-                                    <h4 className="title">Nevine Acotanza</h4>
-                                    <span>Chief Operating Officer</span>
-                                </div>
-                                <div className="description">
-                                    <p>I am available for freelance work. Connect with me via and call in to my account.
-                                    </p>
-                                    <span className="phone">Phone: <a href="tel:01941043264">+01234567890</a></span>
-                                    <span className="mail">Email: <a href="mailto:admin@example.com">admin@example.com</a></span>
-                                </div>
-                                <div className="social-area">
-                                    <div className="name">FIND WITH ME</div>
-                                    <div className="social-icone">
-                                        <a href="/"><i data-feather="facebook"></i></a>
-                                        <a href="/"><i data-feather="linkedin"></i></a>
-                                        <a href="/"><i data-feather="instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                         <div data-aos-delay="600" className="col-12 contact-input">
                             <div className="contact-form-wrapper">
                                 <div className="introduce">
-
-                                    <form className="rnt-contact-form rwt-dynamic-form row" id="contact-form" method="POST" action="mail.php">
+                                    <form className="rnt-contact-form rwt-dynamic-form row" onSubmit={handleSubmit}>
+                                        <div className="col-lg-6">
+                                            <div className="form-group">
+                                                <label htmlFor="name">Your Name</label>
+                                                <input
+                                                    className="form-control form-control-lg"
+                                                    name="name"
+                                                    id="name"
+                                                    type="text"
+                                                    value={formData.name}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
 
                                         <div className="col-lg-6">
                                             <div className="form-group">
-                                                <label htmlFor="contact-name">Your Name</label>
-                                                <input className="form-control form-control-lg" name="contact-name" id="contact-name" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-6">
-                                            <div className="form-group">
-                                                <label htmlFor="contact-phone">Phone Number</label>
-                                                <input className="form-control" name="contact-phone" id="contact-phone" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-12">
-                                            <div className="form-group">
-                                                <label htmlFor="contact-email">Email</label>
-                                                <input className="form-control form-control-sm" id="contact-email" name="contact-email" type="email" />
+                                                <label htmlFor="phone">Phone Number</label>
+                                                <input
+                                                    className="form-control"
+                                                    name="phone"
+                                                    id="phone"
+                                                    type="text"
+                                                    value={formData.phone}
+                                                    onChange={handleChange}
+                                                />
                                             </div>
                                         </div>
 
                                         <div className="col-lg-12">
                                             <div className="form-group">
-                                                <label htmlFor="subject">subject</label>
-                                                <input className="form-control form-control-sm" id="subject" name="subject" type="text" />
+                                                <label htmlFor="email">Email</label>
+                                                <input
+                                                    className="form-control form-control-sm"
+                                                    id="email"
+                                                    name="email"
+                                                    type="email"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
+                                                />
                                             </div>
                                         </div>
 
                                         <div className="col-lg-12">
                                             <div className="form-group">
-                                                <label htmlFor="contact-message">Your Message</label>
-                                                <textarea name="contact-message" id="contact-message" cols="30" rows="10"></textarea>
+                                                <label htmlFor="subject">Subject</label>
+                                                <input
+                                                    className="form-control form-control-sm"
+                                                    id="subject"
+                                                    name="subject"
+                                                    type="text"
+                                                    value={formData.subject}
+                                                    onChange={handleChange}
+                                                />
                                             </div>
                                         </div>
 
                                         <div className="col-lg-12">
-                                            <button name="submit" type="submit" id="submit" className="rn-btn">
+                                            <div className="form-group">
+                                                <label htmlFor="message">Your Message</label>
+                                                <textarea
+                                                    name="message"
+                                                    id="message"
+                                                    cols="30"
+                                                    rows="10"
+                                                    className="form-control"
+                                                    value={formData.message}
+                                                    onChange={handleChange}
+                                                ></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-12">
+                                            <button type="submit" className="rn-btn">
                                                 <span>SEND MESSAGE</span>
                                                 <i data-feather="arrow-right"></i>
                                             </button>
@@ -95,7 +138,7 @@ const Contact = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Contact
+export default Contact;

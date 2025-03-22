@@ -70,7 +70,7 @@ const Portfolio = () => {
                                 <div className="rn-portfolio" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <a href={item?.link} target='_blank'>
+                                            <a href={item?.link} target='_blank' rel="noreferrer"   >
                                                 <img src={item.image} alt="Personal Portfolio" />
                                             </a>
                                         </div>

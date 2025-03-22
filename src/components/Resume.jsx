@@ -16,7 +16,7 @@ const Resume = () => {
         },
         {
             id: 2,
-            image: "assets/images/man.jpg",
+            image: "assets/images/avinash.jpg",
             name: "Avinash Chandraker",
             readTime: "3years exp.",
             title: "The services provide for design",
@@ -28,15 +28,15 @@ const Resume = () => {
         },
         {
             id: 3,
-            image: "assets/images/man.jpg",
-            name: "Mithlesh Janghel",
-            readTime: "4years exp.",
+            image: "assets/images/hemant.jpg",
+            name: "Hemant Chandra",
+            readTime: "5years exp.",
             title: "Mobile app landing design & app maintain",
             category: "App Developer",
-            whatsapp : "919827840898",
-            mail : "",
-            linkedin : "",
-            github:""
+            whatsapp : "918839105236",
+            mail : "info@hemantchandra.com",
+            linkedin : "https://www.linkedin.com/in/hemant-chandra-a60215192/",
+            github:"https://github.com/ChandraHemant "
         }
     ];
 
